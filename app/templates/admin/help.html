@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Formatting Guide{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h1>Admin Dashboard Formatting Guide</h1>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">1. Basic Text Formatting</h2>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>How to Use</th>
+                        <th>Keyboard Shortcut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bold</td>
+                        <td>Click the B button or select text</td>
+                        <td>Ctrl + B</td>
+                    </tr>
+                    <tr>
+                        <td>Italic</td>
+                        <td>Click the I button or select text</td>
+                        <td>Ctrl + I</td>
+                    </tr>
+                    <tr>
+                        <td>Underline</td>
+                        <td>Click the U button or select text</td>
+                        <td>Ctrl + U</td>
+                    </tr>
+                    <tr>
+                        <td>Strikethrough</td>
+                        <td>Click the S button or select text</td>
+                        <td>Alt + Shift + 5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">2. Headings and Paragraphs</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Headings (H1-H6):</strong>
+                    <ul>
+                        <li>Click the 'Paragraph' dropdown in toolbar</li>
+                        <li>Select desired heading level</li>
+                        <li>Or use keyboard: Ctrl + Alt + 1 (for H1) through 6 (for H6)</li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    <strong>Alignment:</strong>
+                    <ul>
+                        <li>Use alignment buttons in toolbar (Left, Center, Right, Justify)</li>
+                        <li>Or select text and use Ctrl + Shift + L/C/R/J</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">3. Lists and Indentation</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Bullet Lists:</h5>
+                    <ul>
+                        <li>Click bullet list icon</li>
+                        <li>Or press Ctrl + Shift + 8</li>
+                        <li>Press Tab to indent</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h5>Numbered Lists:</h5>
+                    <ul>
+                        <li>Click numbered list icon</li>
+                        <li>Or press Ctrl + Shift + 7</li>
+                        <li>Press Tab to indent</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">4. Tables</h2>
+        </div>
+        <div class="card-body">
+            <ol>
+                <li>Click the table icon in toolbar</li>
+                <li>Drag to select rows and columns</li>
+                <li>Or click "Table" → "Insert table"</li>
+                <li>Table editing:
+                    <ul>
+                        <li>Right-click for cell options</li>
+                        <li>Use toolbar for adding/deleting rows/columns</li>
+                        <li>Drag cell borders to resize</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">5. Special Features</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Code Blocks:</h5>
+                    <ol>
+                        <li>Click the code block icon</li>
+                        <li>Select language</li>
+                        <li>Paste or type code</li>
+                    </ol>
+                </div>
+                <div class="col-md-6">
+                    <h5>Blockquotes:</h5>
+                    <ol>
+                        <li>Click blockquote icon</li>
+                        <li>Or press Ctrl + Shift + Q</li>
+                        <li>Type or paste quote</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">6. Images and Media</h2>
+        </div>
+        <div class="card-body">
+            <h5>Adding Images:</h5>
+            <ol>
+                <li>Click the image icon</li>
+                <li>Choose:
+                    <ul>
+                        <li>Upload: Select file from computer</li>
+                        <li>URL: Paste image URL</li>
+                    </ul>
+                </li>
+                <li>Resize: Drag image corners</li>
+                <li>Edit: Double-click image for options</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">7. Quick Tips</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">Select text to see quick formatting toolbar</li>
+                <li class="list-group-item">Right-click for context menu with more options</li>
+                <li class="list-group-item">Use Ctrl + Z to undo and Ctrl + Y to redo</li>
+                <li class="list-group-item">Press F11 for fullscreen editing</li>
+                <li class="list-group-item">Use Ctrl + S to save your work</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %} 

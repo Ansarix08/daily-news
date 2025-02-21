@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        {% for content in contents %}
+        <article class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">{{ content.title }}</h2>
+                <div class="card-text">{{ content.body | safe }}</div>
+                <p class="text-muted">Posted on: {{ content.created_at.strftime('%B %d, %Y') }}</p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    <div class="col-md-4">
+        <!-- AdSense Sidebar Ad -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="{{ config.ADSENSE_CLIENT_ID }}"
+             data-ad-slot="sidebar-ad-slot"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+</div>
+{% endblock %} 

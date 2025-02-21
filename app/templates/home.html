@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        {% if contents %}
+            {% for content in contents %}
+            <article class="card mb-4 content-card">
+                <div class="card-body">
+                    <h2 class="card-title fw-bold mb-3">{{ content.title }}</h2>
+                    {% if content.image_url %}
+                    <div class="image-wrapper mb-4">
+                        <img src="{{ content.image_url }}" alt="{{ content.title }}" class="img-fluid rounded">
+                    </div>
+                    {% endif %}
+                    <div class="card-text content-text">{{ content.body | safe }}</div>
+                    {% if content.external_link %}
+                    <a href="{{ content.external_link }}" target="_blank" class="btn btn-primary mt-4 learn-more-btn">
+                        Learn More 
+                        <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                    {% endif %}
+                    <div class="meta-info mt-4">
+                        <i class="far fa-clock text-primary"></i>
+                        <span class="text-muted ms-2">Last updated: {{ content.updated_at.strftime('%B %d, %Y') }}</span>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state card">
+                <div class="card-body text-center py-5">
+                    <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                    <h3 class="fw-light">No Content Available</h3>
+                    <p class="text-muted">Check back later for updates!</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="col-md-4">
+        <div class="sidebar">
+            <!-- Sidebar Content -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold mb-3">
+                        <i class="fas fa-star text-warning me-2"></i>Featured
+                    </h5>
+                    <p class="card-text">Discover our featured content and stay updated with the latest news.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold mb-3">
+                        <i class="fas fa-bell text-primary me-2"></i>Stay Connected
+                    </h5>
+                    <p class="card-text">Follow us on social media for regular updates.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="btn btn-outline-primary btn-sm me-2">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-sm me-2">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-sm">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .content-card {
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.5s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .content-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .image-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+    
+    .image-wrapper img {
+        transition: transform 0.5s ease;
+    }
+    
+    .image-wrapper:hover img {
+        transform: scale(1.05);
+    }
+    
+    .learn-more-btn {
+        background: linear-gradient(45deg, #6c5ce7, #a363d9);
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+    
+    .learn-more-btn:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(108,92,231,0.3);
+    }
+    
+    .learn-more-btn i {
+        transition: transform 0.3s ease;
+    }
+    
+    .learn-more-btn:hover i {
+        transform: translateX(5px);
+    }
+    
+    .meta-info {
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .sidebar .card {
+        margin-bottom: 1.5rem;
+        animation: slideIn 0.5s ease-out forwards;
+        opacity: 0;
+    }
+    
+    @keyframes slideIn {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    .sidebar .card:nth-child(1) {
+        animation-delay: 0.2s;
+        transform: translateX(20px);
+    }
+    
+    .sidebar .card:nth-child(2) {
+        animation-delay: 0.4s;
+        transform: translateX(20px);
+    }
+    
+    .empty-state {
+        animation: fadeIn 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    .social-links .btn {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        line-height: 40px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+    
+    .social-links .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(108,92,231,0.2);
+    }
+</style>
+{% endblock %}

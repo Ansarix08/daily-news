@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Content{% endblock %}
+
+{% block head %}
+<!-- TinyMCE with your API key -->
+<script src="https://cdn.tiny.cloud/1/8rv774hkb3e6q79eaea7xf4ourbsuq9ymme4dyxmmos4nclj/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#content-editor',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect typography inlinecss',
+        toolbar: [
+            'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify',
+            'bullist numlist outdent indent | removeformat | image media link table | help'
+        ],
+        height: 500,
+        menubar: true,
+        automatic_uploads: true,
+        images_upload_url: '/admin/upload-image',
+        content_style: `
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 16px; line-height: 1.6; }
+            h1, h2, h3, h4, h5, h6 { margin-top: 1em; margin-bottom: 0.5em; }
+            p { margin-bottom: 1em; }
+            img { max-width: 100%; height: auto; }
+        `,
+        setup: function(editor) {
+            editor.on('change', function() {
+                editor.save();
+            });
+        }
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title mb-0">Edit Content</h3>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.title.label(class="form-label") }}
+                    {{ form.title(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.body.label(class="form-label") }}
+                    {{ form.body(id="content-editor", class="form-control") }}
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            {{ form.image.label(class="form-label") }}
+                            {{ form.image(class="form-control") }}
+                            {% if content.image_url %}
+                            <div class="mt-2">
+                                <img src="{{ content.image_url }}" alt="Current image" class="img-thumbnail" style="max-height: 100px;">
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            {{ form.external_link.label(class="form-label") }}
+                            {{ form.external_link(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 

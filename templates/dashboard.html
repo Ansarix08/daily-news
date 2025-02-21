@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Content Dashboard</h1>
+    <div class="mb-4">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContentModal">
+            Add New Content
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for content in contents %}
+                <tr>
+                    <td>{{ content.title }}</td>
+                    <td>{{ content.created_at.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning edit-btn" 
+                                data-id="{{ content.id }}"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#editContentModal">Edit</button>
+                        <button class="btn btn-sm btn-danger delete-btn" 
+                                data-id="{{ content.id }}">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add Content Modal -->
+    <div class="modal fade" id="addContentModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Content</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addContentForm">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="body" class="form-label">Content</label>
+                            <textarea class="form-control rich-editor" id="body" name="body" rows="10" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    tinymce.init({
+        selector: '.rich-editor',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist preview importcss searchreplace autolink autosave code directionality visualchars template pagebreak nonbreaking',
+        toolbar: 'undo redo | formatselect | bold italic strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table | removeformat code preview',
+        height: 400,
+        menubar: 'file edit view insert format tools table help',
+        statusbar: true,
+        autosave_ask_before_unload: true,
+        autosave_interval: '30s',
+        autosave_prefix: '{path}{query}-{id}-',
+        autosave_restore_when_empty: false,
+        autosave_retention: '2m',
+        image_advtab: true,
+        importcss_append: true,
+        content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 16px; }',
+        templates: [
+            { title: 'New Article', description: 'Creates a new article', content: '<h1>Article Title</h1><p>Article content...</p>' },
+            { title: 'New Product', description: 'Creates a new product', content: '<h2>Product Name</h2><p>Product description...</p><button>Buy Now</button>' }
+        ],
+        template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+        template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+        image_caption: true,
+        quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+        noneditable_noneditable_class: 'mceNonEditable',
+        toolbar_mode: 'sliding',
+        contextmenu: 'link image table',
+        skin: 'oxide',
+        content_css: 'default',
+        extended_valid_elements: 'script[src|async|defer|type|charset]'
+    });
+</script>
+{% endblock %} 

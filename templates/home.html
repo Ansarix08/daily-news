@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        {% if content %}
+        <article class="card mb-4">
+            <div class="card-body">
+                <h1 class="card-title">{{ content.title }}</h1>
+                <div class="card-text">{{ content.body | safe }}</div>
+                <p class="text-muted">Last updated: {{ content.updated_at.strftime('%B %d, %Y') }}</p>
+            </div>
+        </article>
+        {% else %}
+        <div class="alert alert-info">No content available yet.</div>
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+        <!-- AdSense Sidebar -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="{{ config.ADSENSE_CLIENT_ID }}"
+                     data-ad-slot="sidebar-ad"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+        <!-- Adsterra Ad -->
+        <div class="card">
+            <div class="card-body">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '{{ config.ADSTERRA_ID }}',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                    document.write('<scr' + 'ipt type="text/javascript" src="//www.highperformancedisplayformat.com/{{ config.ADSTERRA_ID }}/invoke.js"></scr' + 'ipt>');
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
