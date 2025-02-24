@@ -11,13 +11,6 @@ login_manager = LoginManager()
 csrf = CSRFProtect()
 migrate = Migrate()
 
-# Configure SQLAlchemy to work with newer versions
-from sqlalchemy.orm import DeclarativeBase
-
-class Base(DeclarativeBase):
-    pass
-
-db = SQLAlchemy(model_class=Base)
 login_manager.login_view = 'auth.login'
 login_manager.login_message = 'Please log in to access this page.'
 
